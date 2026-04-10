@@ -134,6 +134,30 @@ h2 { font-size: clamp(1.2rem, 2.8vw, 2rem); color: var(--muted); margin-bottom: 
 .social-links { margin-top: 1rem; display: flex; gap: .9rem; flex-wrap: wrap; }
 .social-links a { color: var(--primary); font-weight: 600; }
 
+body.contact-page .section {
+  min-height: calc(100vh - 11rem);
+  display: grid;
+  align-items: center;
+}
+
+.contact-centered {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+body.contact-page .section-title,
+body.contact-page .section-intro {
+  text-align: center;
+}
+
+body.contact-page .contact-form {
+  margin: 0 auto;
+}
+
+body.contact-page .social-links {
+  justify-content: center;
+}
+
 .modal-overlay {
   position: fixed;
   inset: 0;
