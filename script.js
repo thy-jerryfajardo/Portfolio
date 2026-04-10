@@ -1,4 +1,4 @@
-// Handles mobile navigation toggle and menu close on link click
+// Mobile navigation toggle
 const menuToggle = document.getElementById("menuToggle");
 const navLinks = document.getElementById("navLinks");
 
@@ -14,150 +14,104 @@ navLinks.querySelectorAll("a").forEach((link) => {
   });
 });
 
-// Updates footer year dynamically
+// Footer year
 document.getElementById("year").textContent = new Date().getFullYear();
 
-// Adds subtle reveal animation when sections scroll into view
+// Reveal-on-scroll animation
 const revealElements = document.querySelectorAll(".reveal");
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("active");
-      }
-    });
-  },
-  { threshold: 0.15 }
-);
-
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("active");
+    }
+  });
+}, { threshold: 0.16 });
 revealElements.forEach((el) => observer.observe(el));
 
-// Adds 3D tilt interaction to project cards
-const tiltCards = document.querySelectorAll(".tilt-card");
-tiltCards.forEach((card) => {
+// Card tilt interaction
+document.querySelectorAll(".tilt-card").forEach((card) => {
   card.addEventListener("mousemove", (event) => {
     const rect = card.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
-    const rotateY = ((x / rect.width) - 0.5) * 12;
-    const rotateX = (0.5 - (y / rect.height)) * 12;
-    card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+    const rotateY = ((x / rect.width) - 0.5) * 10;
+    const rotateX = (0.5 - (y / rect.height)) * 10;
+    card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
   });
-
   card.addEventListener("mouseleave", () => {
     card.style.transform = "";
   });
 });
 
-// Toggles light/dark theme
+// Theme toggle with persistence
 const themeToggle = document.getElementById("themeToggle");
+const storedTheme = localStorage.getItem("theme");
+if (storedTheme === "dark") document.body.classList.add("dark");
+themeToggle.textContent = document.body.classList.contains("dark") ? "🌙" : "☀️";
+
 themeToggle.addEventListener("click", () => {
   document.body.classList.toggle("dark");
+  const isDark = document.body.classList.contains("dark");
+  localStorage.setItem("theme", isDark ? "dark" : "light");
+  themeToggle.textContent = isDark ? "🌙" : "☀️";
 });
 
-// Draws a simple animated 3D world + mouse trail on canvas
-const bgCanvas = document.getElementById("interactiveBg");
-const bgCtx = bgCanvas.getContext("2d");
+// Scroll tracking and back-to-top
+const sections = document.querySelectorAll("main section[id]");
+const navAnchors = document.querySelectorAll(".nav-links a");
+const backToTop = document.getElementById("backToTop");
 
-let viewportWidth = 0;
-let viewportHeight = 0;
-const worldPoints = [];
-const trailPoints = [];
-let worldTime = 0;
-
-function resizeCanvas() {
-  viewportWidth = window.innerWidth;
-  viewportHeight = window.innerHeight;
-  bgCanvas.width = viewportWidth * window.devicePixelRatio;
-  bgCanvas.height = viewportHeight * window.devicePixelRatio;
-  bgCanvas.style.width = `${viewportWidth}px`;
-  bgCanvas.style.height = `${viewportHeight}px`;
-  bgCtx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
-}
-
-function initWorldPoints() {
-  worldPoints.length = 0;
-  for (let i = 0; i < 90; i += 1) {
-    const angle = (Math.PI * 2 * i) / 90;
-    worldPoints.push({
-      angle,
-      radius: 140 + Math.sin(i) * 12,
-      z: Math.cos(i * 0.4) * 50
-    });
-  }
-}
-
-function addTrailPoint(x, y) {
-  trailPoints.push({ x, y, life: 1 });
-  if (trailPoints.length > 28) {
-    trailPoints.shift();
-  }
-}
-
-function drawFrame() {
-  worldTime += 0.012;
-  bgCtx.clearRect(0, 0, viewportWidth, viewportHeight);
-
-  const isDark = document.body.classList.contains("dark");
-  const cx = viewportWidth * 0.78;
-  const cy = viewportHeight * 0.28;
-  const worldColor = isDark ? "99, 102, 241" : "79, 70, 229";
-  const trailColor = isDark ? "56, 189, 248" : "34, 197, 94";
-
-  // World core glow
-  const glow = bgCtx.createRadialGradient(cx, cy, 8, cx, cy, 120);
-  glow.addColorStop(0, `rgba(${worldColor}, 0.38)`);
-  glow.addColorStop(1, "rgba(0,0,0,0)");
-  bgCtx.fillStyle = glow;
-  bgCtx.beginPath();
-  bgCtx.arc(cx, cy, 130, 0, Math.PI * 2);
-  bgCtx.fill();
-
-  // World ring points with pseudo-3D projection
-  worldPoints.forEach((point, index) => {
-    const spin = point.angle + worldTime;
-    const x3d = Math.cos(spin) * point.radius;
-    const y3d = Math.sin(spin) * point.radius * 0.45;
-    const z3d = point.z + Math.sin(worldTime + index * 0.08) * 35;
-    const depth = (z3d + 160) / 320;
-    const px = cx + x3d * (0.75 + depth * 0.45);
-    const py = cy + y3d * (0.6 + depth * 0.6);
-    const size = 1.2 + depth * 2.4;
-    const alpha = 0.12 + depth * 0.38;
-
-    bgCtx.fillStyle = `rgba(${worldColor}, ${alpha})`;
-    bgCtx.beginPath();
-    bgCtx.arc(px, py, size, 0, Math.PI * 2);
-    bgCtx.fill();
-  });
-
-  // Mouse trail rendering
-  for (let i = trailPoints.length - 1; i >= 0; i -= 1) {
-    const point = trailPoints[i];
-    point.life -= 0.022;
-    if (point.life <= 0) {
-      trailPoints.splice(i, 1);
-      continue;
+function onScrollUpdate() {
+  const marker = window.scrollY + 130;
+  sections.forEach((section) => {
+    const top = section.offsetTop;
+    const bottom = top + section.offsetHeight;
+    if (marker >= top && marker < bottom) {
+      navAnchors.forEach((a) => a.classList.remove("active"));
+      const active = document.querySelector(`.nav-links a[href="#${section.id}"]`);
+      if (active) active.classList.add("active");
     }
-    const radius = 3 + point.life * 12;
-    bgCtx.fillStyle = `rgba(${trailColor}, ${point.life * 0.24})`;
-    bgCtx.beginPath();
-    bgCtx.arc(point.x, point.y, radius, 0, Math.PI * 2);
-    bgCtx.fill();
-  }
-
-  requestAnimationFrame(drawFrame);
+  });
+  backToTop.classList.toggle("show", window.scrollY > 320);
 }
 
-window.addEventListener("resize", resizeCanvas);
-window.addEventListener("mousemove", (event) => addTrailPoint(event.clientX, event.clientY));
-window.addEventListener("touchmove", (event) => {
-  const touch = event.touches[0];
-  if (touch) {
-    addTrailPoint(touch.clientX, touch.clientY);
-  }
-}, { passive: true });
+window.addEventListener("scroll", onScrollUpdate);
+onScrollUpdate();
 
-resizeCanvas();
-initWorldPoints();
-drawFrame();
+backToTop.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+// Project filtering
+const filterButtons = document.querySelectorAll(".filter-btn");
+const projectCards = document.querySelectorAll(".project-card");
+
+filterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    filterButtons.forEach((b) => b.classList.remove("active"));
+    button.classList.add("active");
+    const filter = button.dataset.filter;
+
+    projectCards.forEach((card) => {
+      const categories = card.dataset.category || "";
+      const match = filter === "all" || categories.includes(filter);
+      card.classList.toggle("hidden-card", !match);
+    });
+  });
+});
+
+// Contact form feedback
+const contactForm = document.getElementById("contactForm");
+const formStatus = document.getElementById("formStatus");
+
+contactForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const button = contactForm.querySelector("button[type='submit']");
+  button.disabled = true;
+  formStatus.textContent = "Thanks! Your message has been recorded.";
+  setTimeout(() => {
+    contactForm.reset();
+    button.disabled = false;
+    formStatus.textContent = "";
+  }, 1800);
+});
