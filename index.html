@@ -13,7 +13,7 @@
   <!-- Top navigation (sticky) -->
   <header class="site-header">
     <nav class="navbar container">
-      <a href="#hero" class="logo">JD</a>
+      <a href="#hero" class="logo">JF</a>
       <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -30,13 +30,17 @@
     <!-- Hero section -->
     <section id="hero" class="hero section">
       <div class="container hero-content reveal">
+        <div class="hero-3d-bg" aria-hidden="true"></div>
         <p class="eyebrow">Hi, my name is</p>
-        <h1>Jane Developer</h1>
+        <h1>Jerry Fajardo</h1>
         <h2>Frontend Developer & Problem Solver</h2>
         <p class="hero-text">
           I build clean, accessible, and high-performing web experiences with modern UI and thoughtful interactions.
         </p>
-        <a href="#projects" class="btn-primary">View My Work</a>
+        <div class="hero-cta-group">
+          <a href="#projects" class="btn-primary">View My Work</a>
+          <button type="button" id="themeToggle" class="btn-secondary">Toggle Theme</button>
+        </div>
       </div>
     </section>
 
@@ -64,17 +68,17 @@
         <h3 class="section-title">Projects</h3>
         <p class="section-intro">A few examples of my recent work.</p>
         <div class="projects-grid">
-          <article class="project-card">
+          <article class="project-card tilt-card">
             <h4>Portfolio Redesign</h4>
             <p>A clean redesign focused on performance, responsive behavior, and a modern visual hierarchy.</p>
             <a href="#" aria-label="View Portfolio Redesign project">View Project</a>
           </article>
-          <article class="project-card">
+          <article class="project-card tilt-card">
             <h4>Task Management App</h4>
             <p>A productivity web app with drag-and-drop interactions and smooth micro-animations.</p>
             <a href="#" aria-label="View Task Management App project">View Project</a>
           </article>
-          <article class="project-card">
+          <article class="project-card tilt-card">
             <h4>Landing Page System</h4>
             <p>A reusable landing page layout system with consistent components and easy customization.</p>
             <a href="#" aria-label="View Landing Page System project">View Project</a>
@@ -107,7 +111,7 @@
   <!-- Footer -->
   <footer class="site-footer">
     <div class="container">
-      <p>&copy; <span id="year"></span> Jane Developer. All rights reserved.</p>
+      <p>&copy; <span id="year"></span> Jerry Fajardo. All rights reserved.</p>
     </div>
   </footer>
 
