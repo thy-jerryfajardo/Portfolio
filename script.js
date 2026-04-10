@@ -142,3 +142,39 @@ if (randomTextBtn && randomTextOutput) {
     randomTextOutput.textContent = randomPrompts[index];
   });
 }
+
+// Random rotating role text under name
+const heroRole = document.getElementById("heroRole");
+const roleTexts = [
+  "Full Stack Developer",
+  "System Analyst",
+  "AI Prompting Specialist"
+];
+if (heroRole) {
+  let roleIndex = 0;
+  setInterval(() => {
+    roleIndex = (roleIndex + 1) % roleTexts.length;
+    heroRole.textContent = roleTexts[roleIndex];
+  }, 2200);
+}
+
+// Lazy loading for project images
+const lazyImages = document.querySelectorAll(".lazy-image");
+if ("IntersectionObserver" in window && lazyImages.length > 0) {
+  const imageObserver = new IntersectionObserver((entries, observerRef) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const image = entry.target;
+        image.src = image.dataset.src;
+        image.classList.add("loaded");
+        observerRef.unobserve(image);
+      }
+    });
+  }, { rootMargin: "120px 0px" });
+  lazyImages.forEach((img) => imageObserver.observe(img));
+} else {
+  lazyImages.forEach((img) => {
+    img.src = img.dataset.src;
+    img.classList.add("loaded");
+  });
+}
