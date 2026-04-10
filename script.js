@@ -145,12 +145,22 @@ if (randomTextBtn && randomTextOutput) {
 
 // Random rotating role text under name
 const heroRole = document.getElementById("heroRole");
-const roleTexts = [
-  "Full Stack Developer",
-  "System Analyst",
-  "AI Prompting Specialist"
+const heroRoleDescription = document.getElementById("heroRoleDescription");
+const roleData = [
+  {
+    title: "Full Stack Developer",
+    description: "I build scalable frontends and robust backends that deliver high-performance user experiences."
+  },
+  {
+    title: "System Analyst",
+    description: "I analyze business workflows, map requirements, and design efficient systems that solve real problems."
+  },
+  {
+    title: "AI Prompting Specialist",
+    description: "I craft high-quality AI prompts and workflows to improve automation, productivity, and decision-making."
+  }
 ];
-if (heroRole) {
+if (heroRole && heroRoleDescription) {
   let roleIndex = 0;
   let charIndex = 0;
   let deleting = false;
@@ -159,11 +169,12 @@ if (heroRole) {
   const holdDelay = 1400;
 
   function typeRole() {
-    const currentText = roleTexts[roleIndex];
+    const currentText = roleData[roleIndex].title;
     if (!deleting) {
       charIndex += 1;
       heroRole.textContent = currentText.slice(0, charIndex);
       if (charIndex === currentText.length) {
+        heroRoleDescription.textContent = roleData[roleIndex].description;
         deleting = true;
         setTimeout(typeRole, holdDelay);
         return;
@@ -174,7 +185,7 @@ if (heroRole) {
       heroRole.textContent = currentText.slice(0, Math.max(charIndex, 0));
       if (charIndex <= 0) {
         deleting = false;
-        roleIndex = (roleIndex + 1) % roleTexts.length;
+        roleIndex = (roleIndex + 1) % roleData.length;
         setTimeout(typeRole, 1000);
         return;
       }
@@ -183,6 +194,7 @@ if (heroRole) {
   }
 
   heroRole.textContent = "";
+  heroRoleDescription.textContent = roleData[0].description;
   typeRole();
 }
 
