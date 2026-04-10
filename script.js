@@ -2,20 +2,22 @@
 const menuToggle = document.getElementById("menuToggle");
 const navLinks = document.getElementById("navLinks");
 
-menuToggle.addEventListener("click", () => {
-  const isOpen = navLinks.classList.toggle("open");
-  menuToggle.setAttribute("aria-expanded", String(isOpen));
-});
-
-navLinks.querySelectorAll("a").forEach((link) => {
-  link.addEventListener("click", () => {
-    navLinks.classList.remove("open");
-    menuToggle.setAttribute("aria-expanded", "false");
+if (menuToggle && navLinks) {
+  menuToggle.addEventListener("click", () => {
+    const isOpen = navLinks.classList.toggle("open");
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
   });
-});
+  navLinks.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+    });
+  });
+}
 
 // Footer year
-document.getElementById("year").textContent = new Date().getFullYear();
+const yearEl = document.getElementById("year");
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 // Reveal-on-scroll animation
 const revealElements = document.querySelectorAll(".reveal");
@@ -47,14 +49,15 @@ document.querySelectorAll(".tilt-card").forEach((card) => {
 const themeToggle = document.getElementById("themeToggle");
 const storedTheme = localStorage.getItem("theme");
 if (storedTheme === "dark") document.body.classList.add("dark");
-themeToggle.textContent = document.body.classList.contains("dark") ? "🌙" : "☀️";
-
-themeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-  const isDark = document.body.classList.contains("dark");
-  localStorage.setItem("theme", isDark ? "dark" : "light");
-  themeToggle.textContent = isDark ? "🌙" : "☀️";
-});
+if (themeToggle) {
+  themeToggle.textContent = document.body.classList.contains("dark") ? "🌙" : "☀️";
+  themeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    const isDark = document.body.classList.contains("dark");
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+    themeToggle.textContent = isDark ? "🌙" : "☀️";
+  });
+}
 
 // Scroll tracking and back-to-top
 const sections = document.querySelectorAll("main section[id]");
@@ -72,15 +75,19 @@ function onScrollUpdate() {
       if (active) active.classList.add("active");
     }
   });
-  backToTop.classList.toggle("show", window.scrollY > 320);
+  if (backToTop) {
+    backToTop.classList.toggle("show", window.scrollY > 320);
+  }
 }
 
 window.addEventListener("scroll", onScrollUpdate);
 onScrollUpdate();
 
-backToTop.addEventListener("click", () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-});
+if (backToTop) {
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
 
 // Project filtering
 const filterButtons = document.querySelectorAll(".filter-btn");
@@ -104,14 +111,34 @@ filterButtons.forEach((button) => {
 const contactForm = document.getElementById("contactForm");
 const formStatus = document.getElementById("formStatus");
 
-contactForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const button = contactForm.querySelector("button[type='submit']");
-  button.disabled = true;
-  formStatus.textContent = "Thanks! Your message has been recorded.";
-  setTimeout(() => {
-    contactForm.reset();
-    button.disabled = false;
-    formStatus.textContent = "";
-  }, 1800);
-});
+if (contactForm && formStatus) {
+  contactForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const button = contactForm.querySelector("button[type='submit']");
+    button.disabled = true;
+    formStatus.textContent = "Thanks! Your message has been recorded.";
+    setTimeout(() => {
+      contactForm.reset();
+      button.disabled = false;
+      formStatus.textContent = "";
+    }, 1800);
+  });
+}
+
+// Random text generator on landing page
+const randomTextBtn = document.getElementById("randomTextBtn");
+const randomTextOutput = document.getElementById("randomTextOutput");
+const randomPrompts = [
+  "Build a clean dashboard UI that improves conversion by 20% for a SaaS product.",
+  "Create an AI assistant prompt that summarizes support tickets by urgency and sentiment.",
+  "Design a landing page experiment to increase sign-ups with social proof and clear CTAs.",
+  "Generate a backend API strategy for handling 10k daily requests with low latency.",
+  "Write a product requirement for an AI feature that personalizes user onboarding."
+];
+
+if (randomTextBtn && randomTextOutput) {
+  randomTextBtn.addEventListener("click", () => {
+    const index = Math.floor(Math.random() * randomPrompts.length);
+    randomTextOutput.textContent = randomPrompts[index];
+  });
+}

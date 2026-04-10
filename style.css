@@ -55,6 +55,9 @@ h2 { font-size: clamp(1.2rem, 2.8vw, 2rem); color: var(--muted); margin-bottom: 
 .hero-text { color: var(--muted); margin-bottom: 1.3rem; max-width: 640px; }
 
 .hero-cta-group { display: flex; flex-wrap: wrap; gap: .7rem; }
+.random-generator { margin-top: 1rem; padding: .9rem; max-width: 620px; }
+.random-generator h3 { font-size: 1rem; margin-bottom: .35rem; }
+.random-generator p { color: var(--muted); margin-bottom: .6rem; min-height: 2.3rem; }
 .btn-primary, .btn-secondary, .btn-ghost {
   border-radius: .8rem; padding: .82rem 1.2rem; font-weight: 600; transition: all .22s ease; display: inline-block;
 }
