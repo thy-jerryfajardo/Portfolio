@@ -63,18 +63,22 @@ if (themeToggle) {
 const sections = document.querySelectorAll("main section[id]");
 const navAnchors = document.querySelectorAll(".nav-links a");
 const backToTop = document.getElementById("backToTop");
+const pageName = window.location.pathname.split("/").pop();
+const isHomePage = pageName === "" || pageName === "index.html";
 
 function onScrollUpdate() {
-  const marker = window.scrollY + 130;
-  sections.forEach((section) => {
-    const top = section.offsetTop;
-    const bottom = top + section.offsetHeight;
-    if (marker >= top && marker < bottom) {
-      navAnchors.forEach((a) => a.classList.remove("active"));
-      const active = document.querySelector(`.nav-links a[href="#${section.id}"]`);
-      if (active) active.classList.add("active");
-    }
-  });
+  if (isHomePage) {
+    const marker = window.scrollY + 130;
+    sections.forEach((section) => {
+      const top = section.offsetTop;
+      const bottom = top + section.offsetHeight;
+      if (marker >= top && marker < bottom) {
+        navAnchors.forEach((a) => a.classList.remove("active"));
+        const active = document.querySelector(`.nav-links a[href="#${section.id}"]`);
+        if (active) active.classList.add("active");
+      }
+    });
+  }
   if (backToTop) {
     backToTop.classList.toggle("show", window.scrollY > 320);
   }
@@ -110,48 +114,6 @@ filterButtons.forEach((button) => {
 // Contact form feedback
 const contactForm = document.getElementById("contactForm");
 const formStatus = document.getElementById("formStatus");
-const contactModal = document.getElementById("contactModal");
-const closeContactModal = document.getElementById("closeContactModal");
-const contactTriggers = document.querySelectorAll("a[href='#contact']");
-
-function openContactModal() {
-  if (!contactModal) return;
-  contactModal.classList.add("open");
-  contactModal.setAttribute("aria-hidden", "false");
-  document.body.classList.add("modal-open");
-}
-
-function closeModal() {
-  if (!contactModal) return;
-  contactModal.classList.remove("open");
-  contactModal.setAttribute("aria-hidden", "true");
-  document.body.classList.remove("modal-open");
-}
-
-contactTriggers.forEach((trigger) => {
-  trigger.addEventListener("click", (event) => {
-    event.preventDefault();
-    openContactModal();
-  });
-});
-
-if (closeContactModal) {
-  closeContactModal.addEventListener("click", closeModal);
-}
-
-if (contactModal) {
-  contactModal.addEventListener("click", (event) => {
-    if (event.target === contactModal) {
-      closeModal();
-    }
-  });
-}
-
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
-    closeModal();
-  }
-});
 
 if (contactForm && formStatus) {
   contactForm.addEventListener("submit", (event) => {
@@ -163,7 +125,6 @@ if (contactForm && formStatus) {
       contactForm.reset();
       button.disabled = false;
       formStatus.textContent = "";
-      closeModal();
     }, 1800);
   });
 }
