@@ -152,10 +152,38 @@ const roleTexts = [
 ];
 if (heroRole) {
   let roleIndex = 0;
-  setInterval(() => {
-    roleIndex = (roleIndex + 1) % roleTexts.length;
-    heroRole.textContent = roleTexts[roleIndex];
-  }, 2200);
+  let charIndex = 0;
+  let deleting = false;
+  const typeDelay = 70;
+  const deleteDelay = 45;
+  const holdDelay = 1400;
+
+  function typeRole() {
+    const currentText = roleTexts[roleIndex];
+    if (!deleting) {
+      charIndex += 1;
+      heroRole.textContent = currentText.slice(0, charIndex);
+      if (charIndex === currentText.length) {
+        deleting = true;
+        setTimeout(typeRole, holdDelay);
+        return;
+      }
+      setTimeout(typeRole, typeDelay);
+    } else {
+      charIndex -= 1;
+      heroRole.textContent = currentText.slice(0, Math.max(charIndex, 0));
+      if (charIndex <= 0) {
+        deleting = false;
+        roleIndex = (roleIndex + 1) % roleTexts.length;
+        setTimeout(typeRole, 1000);
+        return;
+      }
+      setTimeout(typeRole, deleteDelay);
+    }
+  }
+
+  heroRole.textContent = "";
+  typeRole();
 }
 
 // Lazy loading for project images
