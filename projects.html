@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Projects by Jerry Fajardo with live demos and GitHub links." />
+  <title>Projects | Jerry Fajardo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#mainContent">Skip to content</a>
+  <header class="site-header">
+    <nav class="navbar container" aria-label="Primary navigation">
+      <a href="index.html" class="logo">JF</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="skills.html">Skills</a></li><li><a href="projects.html" class="active">Projects</a></li><li><a href="certifications.html">Certifications</a></li><li><a href="experience.html">Experience</a></li><li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button type="button" id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">☀️</button>
+    </nav>
+  </header>
+  <main id="mainContent">
+    <section class="section">
+      <div class="container reveal">
+        <h1 class="section-title">Projects</h1>
+        <p class="section-intro">Selected builds focused on real product value, speed, and usability.</p>
+        <div class="filters" role="tablist" aria-label="Project filters">
+          <button class="filter-btn active" data-filter="all">All</button><button class="filter-btn" data-filter="frontend">Frontend</button><button class="filter-btn" data-filter="fullstack">Fullstack</button><button class="filter-btn" data-filter="python">Python</button>
+        </div>
+        <div class="projects-grid">
+          <article class="project-card tilt-card glass-card" data-category="frontend fullstack"><img class="lazy-image" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=900&auto=format&fit=crop&q=80" alt="Portfolio website screenshot" loading="lazy" /><div class="project-body"><h4>Portfolio Platform</h4><p>Modern personal branding site with responsive architecture and conversion-focused sections.</p><p class="tech-stack">HTML · CSS · JavaScript · CI/CD</p><div class="project-links"><a href="https://portfolio-nine-rho-sd56b6ql0u.vercel.app" target="_blank" rel="noopener noreferrer">Live Demo</a><a href="https://github.com/thy-jerryfajardo/Portfolio" target="_blank" rel="noopener noreferrer">GitHub</a></div></div></article>
+          <article class="project-card tilt-card glass-card" data-category="fullstack"><img class="lazy-image" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=900&auto=format&fit=crop&q=80" alt="Dashboard web app screenshot" loading="lazy" /><div class="project-body"><h4>Business Dashboard</h4><p>Data dashboard for KPI tracking with secure auth flow and dynamic charts.</p><p class="tech-stack">React · Node.js · PostgreSQL</p><div class="project-links"><a href="#">Live Demo</a><a href="#">GitHub</a></div></div></article>
+          <article class="project-card tilt-card glass-card" data-category="python fullstack"><img class="lazy-image" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-src="https://images.unsplash.com/photo-1526379879527-8559ecfcaec0?w=900&auto=format&fit=crop&q=80" alt="Automation app screenshot" loading="lazy" /><div class="project-body"><h4>Automation Toolkit</h4><p>Workflow automation scripts that reduce repetitive tasks and improve delivery speed.</p><p class="tech-stack">Python · APIs · Docker</p><div class="project-links"><a href="#">Live Demo</a><a href="#">GitHub</a></div></div></article>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container"><p>&copy; <span id="year"></span> Jerry Fajardo. All rights reserved.</p></div></footer>
+  <button type="button" id="backToTop" class="back-to-top" aria-label="Back to top">↑</button>
+  <script src="script.js"></script>
+</body>
+</html>

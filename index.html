@@ -16,18 +16,18 @@
 
   <header class="site-header">
     <nav class="navbar container" aria-label="Primary navigation">
-      <a href="#hero" class="logo">JF</a>
+      <a href="index.html" class="logo">JF</a>
       <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links" id="navLinks">
-        <li><a href="#hero">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="projects.html">Projects</a></li>
         <li><a href="certifications.html">Certifications</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
       <button type="button" id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">☀️</button>
     </nav>
@@ -43,8 +43,8 @@
           <h2 id="heroRole" aria-live="polite">Full Stack Developer</h2>
           <p class="hero-text" id="heroRoleDescription">I design and build fast, scalable, and user-focused digital products that turn business ideas into measurable outcomes.</p>
           <div class="hero-cta-group">
-            <a href="#projects" class="btn-primary">View Projects</a>
-            <a href="#contact" class="btn-secondary">Contact Me</a>
+            <a href="projects.html" class="btn-primary">View Projects</a>
+            <a href="contact.html" class="btn-secondary">Contact Me</a>
             <a href="#" class="btn-ghost" aria-label="Download resume">Download Resume</a>
           </div>
           <div class="random-generator glass-card" aria-live="polite">
@@ -177,28 +177,30 @@
       </div>
     </section>
 
-    <section id="contact" class="section">
-      <div class="container reveal">
-        <h3 class="section-title">Contact</h3>
-        <p class="section-intro">Let’s build something impactful together.</p>
-        <form class="contact-form glass-card" id="contactForm">
-          <label for="name">Name</label>
-          <input id="name" name="name" type="text" required />
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" required />
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="5" required></textarea>
-          <button type="submit" class="btn-primary">Send Message</button>
-          <p id="formStatus" class="form-status" aria-live="polite"></p>
-        </form>
-        <div class="social-links">
-          <a href="https://github.com/thy-jerryfajardo" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a href="#" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <a href="mailto:hello@jerryfajardo.dev">Email</a>
-        </div>
-      </div>
-    </section>
   </main>
+
+  <div id="contactModal" class="modal-overlay" aria-hidden="true">
+    <div class="modal-panel glass-card" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
+      <button type="button" id="closeContactModal" class="modal-close" aria-label="Close contact modal">×</button>
+      <h3 class="section-title" id="contactModalTitle">Contact</h3>
+      <p class="section-intro">Let’s build something impactful together.</p>
+      <form class="contact-form" id="contactForm">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" required />
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required />
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+        <button type="submit" class="btn-primary">Send Message</button>
+        <p id="formStatus" class="form-status" aria-live="polite"></p>
+      </form>
+      <div class="social-links">
+        <a href="https://github.com/thy-jerryfajardo" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="#" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="mailto:hello@jerryfajardo.dev">Email</a>
+      </div>
+    </div>
+  </div>
 
   <footer class="site-footer">
     <div class="container">

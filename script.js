@@ -110,6 +110,48 @@ filterButtons.forEach((button) => {
 // Contact form feedback
 const contactForm = document.getElementById("contactForm");
 const formStatus = document.getElementById("formStatus");
+const contactModal = document.getElementById("contactModal");
+const closeContactModal = document.getElementById("closeContactModal");
+const contactTriggers = document.querySelectorAll("a[href='#contact']");
+
+function openContactModal() {
+  if (!contactModal) return;
+  contactModal.classList.add("open");
+  contactModal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-open");
+}
+
+function closeModal() {
+  if (!contactModal) return;
+  contactModal.classList.remove("open");
+  contactModal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("modal-open");
+}
+
+contactTriggers.forEach((trigger) => {
+  trigger.addEventListener("click", (event) => {
+    event.preventDefault();
+    openContactModal();
+  });
+});
+
+if (closeContactModal) {
+  closeContactModal.addEventListener("click", closeModal);
+}
+
+if (contactModal) {
+  contactModal.addEventListener("click", (event) => {
+    if (event.target === contactModal) {
+      closeModal();
+    }
+  });
+}
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeModal();
+  }
+});
 
 if (contactForm && formStatus) {
   contactForm.addEventListener("submit", (event) => {
@@ -121,6 +163,7 @@ if (contactForm && formStatus) {
       contactForm.reset();
       button.disabled = false;
       formStatus.textContent = "";
+      closeModal();
     }, 1800);
   });
 }
