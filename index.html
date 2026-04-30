@@ -13,6 +13,7 @@
 </head>
 <body>
   <a class="skip-link" href="#mainContent">Skip to content</a>
+  <div class="progress-bar" id="progressBar"></div>
 
   <header class="site-header">
     <nav class="navbar container" aria-label="Primary navigation">
@@ -43,9 +44,9 @@
           <h2 id="heroRole" aria-live="polite">Full Stack Developer</h2>
           <p class="hero-text" id="heroRoleDescription">I design and build fast, scalable, and user-focused digital products that turn business ideas into measurable outcomes.</p>
           <div class="hero-cta-group">
-            <a href="projects.html" class="btn-primary">View Projects</a>
-            <a href="contact.html" class="btn-secondary">Contact Me</a>
-            <a href="#" class="btn-ghost" aria-label="Download resume">Download Resume</a>
+            <a href="projects.html" class="btn-primary btn-ripple">View Projects</a>
+            <a href="contact.html" class="btn-secondary btn-ripple">Contact Me</a>
+            <a href="#" class="btn-ghost btn-ripple" aria-label="Download resume">Download Resume</a>
           </div>
           <div class="random-generator glass-card" aria-live="polite">
             <h3>Random AI Prompt Idea</h3>
@@ -58,9 +59,9 @@
           <h3>Impact Snapshot</h3>
           <p>Built modern web experiences with clean code, performance-first architecture, and conversion-driven UI.</p>
           <div class="stats-grid">
-            <div><strong>8+</strong><span>Projects</span></div>
-            <div><strong>95+</strong><span>Lighthouse</span></div>
-            <div><strong>100%</strong><span>Responsive</span></div>
+            <div><strong class="counter" data-target="8">0</strong><span>Projects</span></div>
+            <div><strong class="counter" data-target="95">0</strong><span>Lighthouse</span></div>
+            <div><strong class="counter" data-target="100">0</strong><span>Responsive</span></div>
           </div>
         </aside>
       </div>
@@ -149,6 +150,71 @@
               <p class="tech-stack">Python · APIs · Docker</p>
               <div class="project-links"><a href="#">Live Demo</a><a href="#">GitHub</a></div>
             </div>
+          </article>
+          <article class="project-card tilt-card glass-card" data-category="frontend">
+            <img class="lazy-image" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-src="https://images.unsplash.com/photo-1499781350541-7783f6c6a0c8?w=900&auto=format&fit=crop&q=80" alt="Mobile app UI screenshot" loading="lazy" />
+            <div class="project-body">
+              <h4>Mobile-First Landing</h4>
+              <p>High-converting landing page optimized for mobile with animated interactions and analytics.</p>
+              <p class="tech-stack">React · CSS · Vercel</p>
+              <div class="project-links"><a href="#">Live Demo</a><a href="#">GitHub</a></div>
+            </div>
+          </article>
+          <article class="project-card tilt-card glass-card" data-category="fullstack python">
+            <img class="lazy-image" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-src="https://images.unsplash.com/photo-1554224311-beee415c15ue?w=900&auto=format&fit=crop&q=80" alt="API integration screenshot" loading="lazy" />
+            <div class="project-body">
+              <h4>API Data Pipeline</h4>
+              <p>Scaled API service processing 50k+ requests daily with caching, rate limiting, and monitoring.</p>
+              <p class="tech-stack">Node.js · PostgreSQL · Redis</p>
+              <div class="project-links"><a href="#">Live Demo</a><a href="#">GitHub</a></div>
+            </div>
+          </article>
+          <article class="project-card tilt-card glass-card" data-category="frontend fullstack">
+            <img class="lazy-image" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-src="https://images.unsplash.com/photo-1507842217343-583f20270319?w=900&auto=format&fit=crop&q=80" alt="E-commerce storefront screenshot" loading="lazy" />
+            <div class="project-body">
+              <h4>E-Commerce Store</h4>
+              <p>Full-stack store with product filtering, shopping cart, and secure checkout flow.</p>
+              <p class="tech-stack">Next.js · Stripe · Firebase</p>
+              <div class="project-links"><a href="#">Live Demo</a><a href="#">GitHub</a></div>
+            </div>
+          </article>
+          <article class="project-card tilt-card glass-card" data-category="python">
+            <img class="lazy-image" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-src="https://images.unsplash.com/photo-1518432031498-74d440642117?w=900&auto=format&fit=crop&q=80" alt="Data analysis dashboard screenshot" loading="lazy" />
+            <div class="project-body">
+              <h4>Data Analysis Tool</h4>
+              <p>Python-based tool for batch analysis and CSV processing with visual reporting.</p>
+              <p class="tech-stack">Python · Pandas · Matplotlib</p>
+              <div class="project-links"><a href="#">Live Demo</a><a href="#">GitHub</a></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" class="section">
+      <div class="container reveal">
+        <h3 class="section-title">Social Proof</h3>
+        <p class="section-intro">What clients and colleagues say about working with me.</p>
+        <div class="testimonials-grid">
+          <article class="testimonial">
+            <p class="testimonial-text">"Jerry delivered a production-ready dashboard ahead of schedule. Clean code, great communication, and results-driven approach."</p>
+            <p class="testimonial-author">Sarah Chen</p>
+            <p class="testimonial-role">Product Manager, TechCorp</p>
+          </article>
+          <article class="testimonial">
+            <p class="testimonial-text">"The AI prompting workflows Jerry designed reduced our support response time by 40%. Highly recommend for technical depth and innovation."</p>
+            <p class="testimonial-author">Marcus Rodriguez</p>
+            <p class="testimonial-role">Operations Lead, StartupXYZ</p>
+          </article>
+          <article class="testimonial">
+            <p class="testimonial-text">"Full stack skills are rare, but Jerry's ability to think about both user experience and backend performance is exceptional. Great to work with."</p>
+            <p class="testimonial-author">Lisa Anderson</p>
+            <p class="testimonial-role">CTO, Digital Solutions Inc</p>
+          </article>
+          <article class="testimonial">
+            <p class="testimonial-text">"Transformed our legacy codebase into a modern, maintainable system. Jerry's technical leadership elevated our entire team's capabilities."</p>
+            <p class="testimonial-author">James Murphy</p>
+            <p class="testimonial-role">Engineering Manager, CloudServices</p>
           </article>
         </div>
       </div>

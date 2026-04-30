@@ -15,9 +15,96 @@ if (menuToggle && navLinks) {
   });
 }
 
+// Mouse tracking gradient background
+document.addEventListener("mousemove", (e) => {
+  document.body.style.setProperty("--mx", e.clientX + "px");
+  document.body.style.setProperty("--my", e.clientY + "px");
+});
+
 // Footer year
 const yearEl = document.getElementById("year");
 if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+// Reading progress bar
+const progressBar = document.getElementById("progressBar");
+if (progressBar) {
+  window.addEventListener("scroll", () => {
+    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (window.scrollY / windowHeight) * 100;
+    progressBar.style.width = scrolled + "%";
+  });
+}
+
+// Animated counter for stats
+function animateCounters() {
+  const counters = document.querySelectorAll(".counter[data-target]");
+  counters.forEach((counter) => {
+    const target = parseFloat(counter.dataset.target);
+    const duration = 1200;
+    const start = Date.now();
+    const startValue = 0;
+
+    const updateCounter = () => {
+      const elapsed = Date.now() - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const easeOutQuad = 1 - (1 - progress) * (1 - progress);
+      const current = Math.floor(startValue + (target - startValue) * easeOutQuad);
+      counter.textContent = current;
+
+      if (progress < 1) {
+        requestAnimationFrame(updateCounter);
+      } else {
+        counter.textContent = Math.floor(target) + (target === 100 ? "%" : "+");
+      }
+    };
+
+    if (!counter.dataset.animated) {
+      counter.dataset.animated = "true";
+      updateCounter();
+    }
+  });
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting && entry.target.classList.contains("stats-grid")) {
+      animateCounters();
+      counterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+const statsGrid = document.querySelector(".stats-grid");
+if (statsGrid) {
+  counterObserver.observe(statsGrid);
+}
+
+// Floating tech badges
+const techStack = ["React", "Node.js", "TypeScript", "Python", "Docker", "PostgreSQL", "Vercel", "Firebase"];
+const floatingContainer = document.body;
+
+function createFloatingBadge() {
+  if (Math.random() > 0.6) return;
+
+  const badge = document.createElement("div");
+  badge.className = "floating-badge";
+  badge.textContent = techStack[Math.floor(Math.random() * techStack.length)];
+
+  const randomX = Math.random() * window.innerWidth;
+  const randomDuration = 6 + Math.random() * 4;
+  const randomTx = (Math.random() - 0.5) * 100;
+
+  badge.style.left = randomX + "px";
+  badge.style.top = window.innerHeight + "px";
+  badge.style.setProperty("--tx", randomTx + "px");
+  badge.style.animationDuration = randomDuration + "s";
+
+  floatingContainer.appendChild(badge);
+
+  setTimeout(() => badge.remove(), randomDuration * 1000);
+}
+
+setInterval(createFloatingBadge, 3000);
 
 // Reveal-on-scroll animation
 const revealElements = document.querySelectorAll(".reveal");
@@ -222,3 +309,29 @@ if ("IntersectionObserver" in window && lazyImages.length > 0) {
     img.classList.add("loaded");
   });
 }
+
+// Ripple effect on buttons
+document.querySelectorAll(".btn-ripple").forEach((button) => {
+  button.addEventListener("click", (e) => {
+    const rect = button.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const ripple = document.createElement("span");
+    ripple.style.position = "absolute";
+    ripple.style.left = x + "px";
+    ripple.style.top = y + "px";
+    ripple.style.width = "0";
+    ripple.style.height = "0";
+    ripple.style.borderRadius = "50%";
+    ripple.style.background = "rgba(255,255,255,.5)";
+    ripple.style.pointerEvents = "none";
+    ripple.style.animation = "ripple 0.6s ease-out";
+    ripple.style.transform = "translate(-50%, -50%)";
+
+    button.style.position = "relative";
+    button.appendChild(ripple);
+
+    setTimeout(() => ripple.remove(), 600);
+  });
+});
