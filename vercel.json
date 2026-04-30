@@ -1,9 +1,6 @@
 {
   "buildCommand": "echo 'Static site with Vercel Functions'",
   "outputDirectory": "./",
-  "env": {
-    "HUGGINGFACE_API_KEY": "@huggingface-api-key"
-  },
   "functions": {
     "api/chat.js": {
       "memory": 512,
@@ -11,4 +8,5 @@
     }
   }
 }
+
 

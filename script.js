@@ -349,13 +349,17 @@ class ChatWidget {
     this.createWidget();
     this.setupEventListeners();
     this.loadChatHistory();
+    // Show welcome only if no chat history exists
+    if (this.messages.length === 0) {
+      this.showWelcomeMessage();
+    }
   }
 
   createWidget() {
     // Create toggle button with tooltip
     const toggleBtn = document.createElement("button");
     toggleBtn.className = "chat-toggle-btn";
-    toggleBtn.innerHTML = "💬";
+    toggleBtn.textContent = "💬";
     toggleBtn.setAttribute("aria-label", "Open AI chatbot");
     toggleBtn.title = "Chat with AI assistant";
     document.body.appendChild(toggleBtn);
@@ -387,19 +391,15 @@ class ChatWidget {
     this.input = container.querySelector("#chatInput");
     this.sendBtn = container.querySelector("#chatSendBtn");
     this.closeBtn = container.querySelector(".chat-close-btn");
-
-    // Add welcome message
-    this.showWelcomeMessage();
   }
 
   showWelcomeMessage() {
     const welcomeEl = document.createElement("div");
     welcomeEl.className = "chat-message assistant";
-    welcomeEl.innerHTML = `
-      <div class="chat-message-bubble">
-        👋 Hi! I'm an AI assistant here to answer questions about Jerry's skills, projects, and experience. Feel free to ask anything!
-      </div>
-    `;
+    const bubble = document.createElement("div");
+    bubble.className = "chat-message-bubble";
+    bubble.textContent = "👋 Hi! I'm an AI assistant here to answer questions about Jerry's skills, projects, and experience. Feel free to ask anything!";
+    welcomeEl.appendChild(bubble);
     this.messagesDiv.appendChild(welcomeEl);
   }
 
