@@ -335,3 +335,225 @@ document.querySelectorAll(".btn-ripple").forEach((button) => {
     setTimeout(() => ripple.remove(), 600);
   });
 });
+
+// AI Chatbot Widget
+class ChatWidget {
+  constructor() {
+    this.isOpen = false;
+    this.messages = [];
+    this.isLoading = false;
+    this.init();
+  }
+
+  init() {
+    this.createWidget();
+    this.setupEventListeners();
+    this.loadChatHistory();
+  }
+
+  createWidget() {
+    // Create toggle button
+    const toggleBtn = document.createElement("button");
+    toggleBtn.className = "chat-toggle-btn";
+    toggleBtn.innerHTML = "💬";
+    toggleBtn.setAttribute("aria-label", "Open chat");
+    document.body.appendChild(toggleBtn);
+
+    // Create chat container
+    const container = document.createElement("div");
+    container.className = "chatbot-container";
+    container.innerHTML = `
+      <div class="chat-header">
+        <h3>Ask me anything</h3>
+        <button class="chat-close-btn" aria-label="Close chat">&times;</button>
+      </div>
+      <div class="chat-messages"></div>
+      <div class="chat-input-area">
+        <input
+          type="text"
+          id="chatInput"
+          placeholder="Ask about my skills, projects..."
+          aria-label="Chat message input"
+        />
+        <button id="chatSendBtn" aria-label="Send message">Send</button>
+      </div>
+    `;
+    document.body.appendChild(container);
+
+    this.toggleBtn = toggleBtn;
+    this.container = container;
+    this.messagesDiv = container.querySelector(".chat-messages");
+    this.input = container.querySelector("#chatInput");
+    this.sendBtn = container.querySelector("#chatSendBtn");
+    this.closeBtn = container.querySelector(".chat-close-btn");
+  }
+
+  setupEventListeners() {
+    // Toggle chat
+    this.toggleBtn.addEventListener("click", () => this.toggleChat());
+    this.closeBtn.addEventListener("click", () => this.closeChat());
+
+    // Send message
+    this.sendBtn.addEventListener("click", () => this.sendMessage());
+    this.input.addEventListener("keypress", (e) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        this.sendMessage();
+      }
+    });
+  }
+
+  toggleChat() {
+    if (this.isOpen) {
+      this.closeChat();
+    } else {
+      this.openChat();
+    }
+  }
+
+  openChat() {
+    this.isOpen = true;
+    this.container.classList.add("open");
+    this.toggleBtn.classList.add("hidden");
+    this.input.focus();
+  }
+
+  closeChat() {
+    this.isOpen = false;
+    this.container.classList.remove("open");
+    this.toggleBtn.classList.remove("hidden");
+  }
+
+  async sendMessage() {
+    const message = this.input.value.trim();
+
+    if (!message) {
+      return;
+    }
+
+    if (this.isLoading) {
+      return;
+    }
+
+    // Display user message
+    this.displayMessage(message, "user");
+    this.input.value = "";
+    this.isLoading = true;
+    this.sendBtn.disabled = true;
+
+    // Show typing indicator
+    this.showTypingIndicator();
+
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ message })
+      });
+
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (data.success) {
+        this.displayMessage(data.reply, "assistant");
+        this.saveChatHistory();
+      } else {
+        this.displayMessage(
+          data.error || "Sorry, I couldn't process that. Please try again.",
+          "error"
+        );
+      }
+    } catch (error) {
+      console.error("Chat error:", error);
+      this.displayMessage(
+        "Sorry, there was an issue connecting to the chat. Please try again.",
+        "error"
+      );
+    } finally {
+      this.isLoading = false;
+      this.sendBtn.disabled = false;
+      this.hideTypingIndicator();
+      this.messagesDiv.scrollTop = this.messagesDiv.scrollHeight;
+    }
+  }
+
+  displayMessage(text, type) {
+    const messageEl = document.createElement("div");
+
+    if (type === "error") {
+      messageEl.className = "chat-error";
+      messageEl.textContent = text;
+    } else {
+      messageEl.className = `chat-message ${type}`;
+      const bubble = document.createElement("div");
+      bubble.className = "chat-message-bubble";
+      bubble.textContent = text;
+      messageEl.appendChild(bubble);
+
+      this.messages.push({ text, type, timestamp: Date.now() });
+    }
+
+    this.messagesDiv.appendChild(messageEl);
+    this.messagesDiv.scrollTop = this.messagesDiv.scrollHeight;
+  }
+
+  showTypingIndicator() {
+    const indicator = document.createElement("div");
+    indicator.className = "chat-message";
+    indicator.innerHTML = `
+      <div class="typing-indicator">
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+      </div>
+    `;
+    indicator.id = "typingIndicator";
+    this.messagesDiv.appendChild(indicator);
+    this.messagesDiv.scrollTop = this.messagesDiv.scrollHeight;
+  }
+
+  hideTypingIndicator() {
+    const indicator = document.getElementById("typingIndicator");
+    if (indicator) {
+      indicator.remove();
+    }
+  }
+
+  saveChatHistory() {
+    sessionStorage.setItem("chatHistory", JSON.stringify(this.messages));
+  }
+
+  loadChatHistory() {
+    const saved = sessionStorage.getItem("chatHistory");
+    if (saved) {
+      try {
+        this.messages = JSON.parse(saved);
+        this.messages.forEach((msg) => {
+          const messageEl = document.createElement("div");
+          messageEl.className = `chat-message ${msg.type}`;
+          const bubble = document.createElement("div");
+          bubble.className = "chat-message-bubble";
+          bubble.textContent = msg.text;
+          messageEl.appendChild(bubble);
+          this.messagesDiv.appendChild(messageEl);
+        });
+      } catch (error) {
+        console.error("Error loading chat history:", error);
+      }
+    }
+  }
+}
+
+// Initialize chat widget when DOM is ready
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", () => {
+    new ChatWidget();
+  });
+} else {
+  new ChatWidget();
+}
