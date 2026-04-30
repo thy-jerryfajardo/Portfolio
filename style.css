@@ -137,9 +137,42 @@ h2 { font-size: clamp(1.2rem, 2.8vw, 2rem); color: var(--muted); margin-bottom: 
 .project-card:hover {
   box-shadow: 0 16px 32px rgba(79,70,229,.15), inset 0 1px 0 rgba(255,255,255,.1);
 }
-.project-card img { width: 100%; height: 180px; object-fit: cover; display: block; }
-.lazy-image { opacity: 0.2; filter: blur(2px); transition: opacity .35s ease, filter .35s ease; }
-.lazy-image.loaded { opacity: 1; filter: blur(0); }
+.project-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  background: linear-gradient(135deg, #e0e7ff 0%, #f0f4ff 100%);
+}
+
+.lazy-image {
+  opacity: 1;
+  filter: blur(0);
+  transition: opacity .4s ease, filter .4s ease;
+  background: linear-gradient(90deg, #e0e7ff 25%, #f0f4ff 50%, #e0e7ff 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.lazy-image.loaded {
+  opacity: 1;
+  filter: blur(0);
+  animation: none;
+  background: none;
+}
+
+body.dark .project-card img {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+}
+
+body.dark .lazy-image {
+  background: linear-gradient(90deg, #1e293b 25%, #0f172a 50%, #1e293b 75%);
+}
 .project-body { padding: .9rem; }
 .project-body p { color: var(--muted); margin-bottom: .6rem; }
 .tech-stack { font-size: .9rem; }
