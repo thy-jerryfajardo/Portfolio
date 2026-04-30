@@ -360,8 +360,8 @@ class ChatWidget {
     const toggleBtn = document.createElement("button");
     toggleBtn.className = "chat-toggle-btn";
     toggleBtn.textContent = "💬";
-    toggleBtn.setAttribute("aria-label", "Open AI chatbot");
-    toggleBtn.title = "Chat with AI assistant";
+    toggleBtn.setAttribute("aria-label", "Open Dan chatbot");
+    toggleBtn.title = "Chat with Dan";
     document.body.appendChild(toggleBtn);
 
     // Create chat container
@@ -369,7 +369,7 @@ class ChatWidget {
     container.className = "chatbot-container";
     container.innerHTML = `
       <div class="chat-header">
-        <h3>✨ AI Assistant</h3>
+        <h3>✨ Dan</h3>
         <button class="chat-close-btn" aria-label="Close chat">&times;</button>
       </div>
       <div class="chat-messages"></div>
@@ -398,7 +398,7 @@ class ChatWidget {
     welcomeEl.className = "chat-message assistant";
     const bubble = document.createElement("div");
     bubble.className = "chat-message-bubble";
-    bubble.textContent = "👋 Hi! I'm an AI assistant here to answer questions about Jerry's skills, projects, and experience. Feel free to ask anything!";
+    bubble.textContent = "👋 Hi! I'm Dan, your AI assistant. Ask me anything about Jerry's skills, projects, and experience!";
     welcomeEl.appendChild(bubble);
     this.messagesDiv.appendChild(welcomeEl);
   }

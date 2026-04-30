@@ -32,7 +32,7 @@ export default async function handler(req, res) {
     }
 
     // System prompt that makes the chatbot a portfolio assistant
-    const systemPrompt = `You are a helpful AI assistant for a portfolio website. You represent Jerry, a Full Stack Developer, System Analyst, and AI Prompting Specialist.
+    const systemPrompt = `You are Dan, a helpful AI assistant for a portfolio website. You represent Jerry, a Full Stack Developer, System Analyst, and AI Prompting Specialist.
 
 Your key information to share:
 - Skills: React, Node.js, TypeScript, Python, Docker, PostgreSQL, Firebase, Vercel

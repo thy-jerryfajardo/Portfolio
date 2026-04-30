@@ -703,17 +703,18 @@ body.dark #chatInput:focus {
 }
 
 .chat-toggle-btn::after {
-  content: "AI";
+  content: "Dan";
   position: absolute;
   top: -8px;
   right: 2px;
-  background: #ef4444;
+  background: linear-gradient(135deg, #ef4444, #f97316);
   color: white;
-  font-size: 0.65rem;
-  padding: 2px 5px;
+  font-size: 0.7rem;
+  padding: 3px 7px;
   border-radius: 12px;
   font-weight: bold;
   animation: badge-bounce 2s ease-in-out infinite;
+  letter-spacing: 0.3px;
 }
 
 @keyframes pulse-glow {
@@ -764,7 +765,7 @@ body.dark #chatInput:focus {
 /* Enhanced container styling */
 .chatbot-container {
   position: fixed;
-  bottom: 1.5rem;
+  top: 5.5rem;
   right: 1.5rem;
   width: 420px;
   max-height: 650px;
@@ -777,7 +778,7 @@ body.dark #chatInput:focus {
   display: flex;
   flex-direction: column;
   opacity: 0;
-  transform: translateY(30px) scale(0.9);
+  transform: translateY(-30px) scale(0.9);
   pointer-events: none;
   transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
   z-index: 998;
@@ -804,7 +805,7 @@ body.dark #chatInput:focus {
 @keyframes slideInUp {
   from {
     opacity: 0;
-    transform: translateY(30px) scale(0.9);
+    transform: translateY(-30px) scale(0.9);
   }
   to {
     opacity: 1;
@@ -844,7 +845,7 @@ body.dark .chat-error {
   .chatbot-container {
     width: calc(100vw - 2rem);
     max-height: 75vh;
-    bottom: 1rem;
+    top: 5rem;
     right: 1rem;
   }
 
