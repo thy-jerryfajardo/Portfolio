@@ -469,7 +469,9 @@ class ChatWidget {
       });
 
       if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
+        const errorData = await response.json().catch(() => ({ error: "Unknown error" }));
+        const errorMsg = errorData.error || `API error: ${response.status}`;
+        throw new Error(errorMsg);
       }
 
       const data = await response.json();
@@ -485,10 +487,17 @@ class ChatWidget {
       }
     } catch (error) {
       console.error("Chat error:", error);
-      this.displayMessage(
-        "Sorry, there was an issue connecting to the chat. Please try again.",
-        "error"
-      );
+      let errorMessage = "Sorry, there was an issue with the chat. ";
+
+      if (error.message.includes("API error: 500")) {
+        errorMessage += "The API isn't properly configured. Please check the environment variables.";
+      } else if (error.message.includes("API error: 429")) {
+        errorMessage += "Rate limited. Please try again in a moment.";
+      } else {
+        errorMessage += "Please try again.";
+      }
+
+      this.displayMessage(errorMessage, "error");
     } finally {
       this.isLoading = false;
       this.sendBtn.disabled = false;
