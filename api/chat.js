@@ -87,12 +87,18 @@ When users ask about qualifications, experience, or projects, refer them to the 
         return res.status(429).json({ success: false, error: 'Rate limited. Please try again in a moment.' });
       }
       if (hfResponse.status === 401) {
-        return res.status(401).json({ success: false, error: 'API authentication failed' });
+        return res.status(401).json({ success: false, error: 'Authentication failed - check your Hugging Face API token.' });
+      }
+      if (hfResponse.status === 403) {
+        return res.status(403).json({ success: false, error: 'Permission denied - your token may not have Inference API access.' });
+      }
+      if (hfResponse.status === 500) {
+        return res.status(500).json({ success: false, error: 'Hugging Face API server error. Try again in a moment.' });
       }
 
       return res.status(hfResponse.status).json({
         success: false,
-        error: 'Failed to get response from AI service. Please try again.'
+        error: `AI service error (${hfResponse.status}). Please try again.`
       });
     }
 
