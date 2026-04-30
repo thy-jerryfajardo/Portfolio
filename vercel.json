@@ -1,7 +1,6 @@
 {
   "buildCommand": "echo 'Static site with Vercel Functions'",
   "outputDirectory": "./",
-  "framework": "other",
   "env": {
     "HUGGINGFACE_API_KEY": "@huggingface-api-key"
   },
@@ -12,3 +11,4 @@
     }
   }
 }
+
