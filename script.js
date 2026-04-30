@@ -352,11 +352,12 @@ class ChatWidget {
   }
 
   createWidget() {
-    // Create toggle button
+    // Create toggle button with tooltip
     const toggleBtn = document.createElement("button");
     toggleBtn.className = "chat-toggle-btn";
     toggleBtn.innerHTML = "💬";
-    toggleBtn.setAttribute("aria-label", "Open chat");
+    toggleBtn.setAttribute("aria-label", "Open AI chatbot");
+    toggleBtn.title = "Chat with AI assistant";
     document.body.appendChild(toggleBtn);
 
     // Create chat container
@@ -364,7 +365,7 @@ class ChatWidget {
     container.className = "chatbot-container";
     container.innerHTML = `
       <div class="chat-header">
-        <h3>Ask me anything</h3>
+        <h3>✨ AI Assistant</h3>
         <button class="chat-close-btn" aria-label="Close chat">&times;</button>
       </div>
       <div class="chat-messages"></div>
@@ -372,7 +373,7 @@ class ChatWidget {
         <input
           type="text"
           id="chatInput"
-          placeholder="Ask about my skills, projects..."
+          placeholder="Ask me anything about my work..."
           aria-label="Chat message input"
         />
         <button id="chatSendBtn" aria-label="Send message">Send</button>
@@ -386,6 +387,20 @@ class ChatWidget {
     this.input = container.querySelector("#chatInput");
     this.sendBtn = container.querySelector("#chatSendBtn");
     this.closeBtn = container.querySelector(".chat-close-btn");
+
+    // Add welcome message
+    this.showWelcomeMessage();
+  }
+
+  showWelcomeMessage() {
+    const welcomeEl = document.createElement("div");
+    welcomeEl.className = "chat-message assistant";
+    welcomeEl.innerHTML = `
+      <div class="chat-message-bubble">
+        👋 Hi! I'm an AI assistant here to answer questions about Jerry's skills, projects, and experience. Feel free to ask anything!
+      </div>
+    `;
+    this.messagesDiv.appendChild(welcomeEl);
   }
 
   setupEventListeners() {
