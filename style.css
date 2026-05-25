@@ -399,6 +399,21 @@ body.dark .profile-photo { border-color: #1f2937; }
   pointer-events: auto;
 }
 
+/* Certificates gallery */
+.cert-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.cert-item { display: block; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: var(--card); box-shadow: var(--shadow); }
+.cert-item img { width: 100%; height: 180px; object-fit: cover; display: block; transition: transform .25s ease, filter .25s ease; }
+.cert-item:hover img { transform: scale(1.03); filter: brightness(1.02); }
+
+@media (max-width: 520px) {
+  .cert-item img { height: 140px; }
+}
+
 .chat-header {
   padding: 1.4rem;
   background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(34, 197, 94, 0.05));
