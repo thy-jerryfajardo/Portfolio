@@ -1089,6 +1089,175 @@ body.dark .chat-error {
   }
 }
 
+/* ========== REFERENCE CARDS - FLOATING BUBBLES ========== */
+.references-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  position: relative;
+}
+
+.reference-card {
+  position: relative;
+  padding: 2rem;
+  border-radius: 2rem;
+  background: var(--card);
+  backdrop-filter: blur(12px);
+  border: 2px solid transparent;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: translateY(0);
+  animation: float 3s ease-in-out infinite;
+  box-shadow: 0 8px 32px rgba(79, 70, 229, 0.1);
+}
+
+.reference-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(79, 70, 229, 0.1) 50%,
+    transparent 70%
+  );
+  border-radius: 2rem;
+  animation: spin 3s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.reference-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 2rem;
+  border: 2px solid transparent;
+  background: linear-gradient(45deg, var(--primary), var(--primary-2), var(--primary)) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.reference-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 24px 48px rgba(79, 70, 229, 0.2);
+  border-color: transparent;
+}
+
+.reference-card:hover::before,
+.reference-card:hover::after {
+  opacity: 1;
+}
+
+.reference-card:hover::before {
+  animation: spin 2s linear infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.reference-header {
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.reference-header h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary), var(--primary-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.3rem;
+}
+
+.reference-role {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.reference-description {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.reference-contact {
+  display: flex;
+  gap: 0.8rem;
+  position: relative;
+  z-index: 1;
+  flex-wrap: wrap;
+}
+
+.contact-link {
+  padding: 0.6rem 1rem;
+  background: rgba(79, 70, 229, 0.1);
+  border: 1px solid rgba(79, 70, 229, 0.2);
+  border-radius: 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary);
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.contact-link:hover {
+  background: rgba(79, 70, 229, 0.15);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.15);
+}
+
+/* Interactive border effect on mouse move */
+.reference-card.active-hover::after {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .references-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .reference-card {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .reference-card:hover {
+    transform: translateY(-8px);
+  }
+}
+
 @media (max-width: 680px) {
   .chatbot-container {
     width: calc(100vw - 1.5rem);
