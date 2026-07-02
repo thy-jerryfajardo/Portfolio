@@ -2,6 +2,15 @@
 const menuToggle = document.getElementById("menuToggle");
 const navLinks = document.getElementById("navLinks");
 
+const siteLoader = document.getElementById("siteLoader");
+if (siteLoader) {
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      siteLoader.classList.add("hidden");
+    }, 650);
+  });
+}
+
 if (menuToggle && navLinks) {
   menuToggle.addEventListener("click", () => {
     const isOpen = navLinks.classList.toggle("open");

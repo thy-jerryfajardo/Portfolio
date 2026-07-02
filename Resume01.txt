@@ -1,0 +1,47 @@
+JERRY FAJARDO
+Brgy. Fabrica, Sagay City, Negros Occidental
+09090576776
+jerryfajardo422@gmail.com
+
+PROFESSIONAL PROFILE
+Goal-oriented BSIT graduate and Programming Proficiency Awardee combining software engineering foundations with hands-on expertise in full-stack development, secure systems, and cloud integrations. Highly adaptable across multi-disciplinary IT environments, with proven capability in building scalable Laravel backend applications, engineering custom WordPress frameworks, and automating technical workflows verified by a structured 486-hour industry internship.
+
+TECHNICAL SKILLS
+Languages: PHP, Python, JavaScript, TypeScript, HTML5, CSS3, SQL
+Frameworks & CMS: Laravel, ReactJS, NodeJS, WordPress (Custom Themes & Plugins)
+Cloud & DevOps: Google Cloud Architecture, Firebase Integration, Vercel, Git Version Control, Infrastructure Mapping
+Security & Tools: Security Auditing (Tenable Nessus), Systems Analysis & Design, Hardware Diagnostics
+
+PROFESSIONAL EXPERIENCE
+Software Engineer Intern - THY Web Development Inc., Bacolod City | Feb 2026 - May 2026
+- Completed 486 hours of technical training specializing in production-ready full-stack frameworks.
+- Architected and optimized secure backend APIs and MVC structures leveraging Laravel (PHP).
+- Engineered high-performance WordPress platforms utilizing custom HTML, CSS, and interactive JavaScript features.
+- Collaborated with engineering teams to tune relational database workflows, eliminate critical security bugs, and improve UI/UX.
+
+Youth Leader & Facilitator (13th Batch) - Gabaan Youth Lead | Jan 2026 - Present
+- Spearheaded digital workflows and collaborative community development initiatives under rigid project milestones.
+- Mentored over 30 peers in foundational IT competencies, software troubleshooting, and deployment workflows.
+
+TECHNICAL PROJECTS
+Adolescent Risk Analytic System - Project Lead (Capstone) | 2026
+- Led end-to-end full-stack engineering of an analytical engine detecting early behavioral risks through complex input mapping.
+- Designed telemetry tracking systems with secure database schemas to ensure protected storage of student profiles.
+
+SunnSafe Deployment - Core Programmer (sunnsafe.vercel.app) | 2025
+- Programmed a responsive, high-availability web app deployed via Vercel using ReactJS, TypeScript, and component micro-architectures.
+
+Writerity Platform & Amsys Tracker - Technical Collaborator | 2025 - 2026
+- Maintained content delivery infrastructures on WordPress (writerity.com) and optimized data tracking pipelines using NodeJS dashboards.
+
+EDUCATION
+Bachelor of Science in Information Technology (BSIT) | Graduated June 2026
+State University of Northern Negros (SUNN) - Old Sagay Campus
+Honors & Awards: Programming Proficiency Awardee (Recognized for exceptional technical dedication)
+Core Coursework: Information Assurance & Cyber Security (Tenable Nessus framework), Advanced Systems Analysis
+
+CERTIFICATIONS & SEMINARS
+Cloud Computing Analyst: Firebase Application Architecture Evaluation (May 2026)
+Information Assurance and Security: Advanced Vulnerability Scanning via Tenable Nessus (2026)
+UI/UX Interface Design: Certified by SUNN College of ICT & Engineering in Figma (Dec 2025)
+Google DevFest Bacolod: Deep-dive into global cloud structures and emerging API innovations (Nov 2025)
