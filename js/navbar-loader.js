@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Re-attach menu toggle functionality
     attachMenuToggle();
+    document.dispatchEvent(new CustomEvent('navbar:loaded'));
   } catch (error) {
     console.error('Failed to load navbar:', error);
   }
@@ -28,7 +29,7 @@ function attachMenuToggle() {
 
   if (menuToggle) {
     menuToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
+      navLinks.classList.toggle('open');
       menuToggle.setAttribute('aria-expanded', menuToggle.getAttribute('aria-expanded') === 'false' ? 'true' : 'false');
     });
   }
@@ -36,7 +37,7 @@ function attachMenuToggle() {
   // Close menu when a link is clicked
   document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
-      navLinks.classList.remove('active');
+      navLinks.classList.remove('open');
       if (menuToggle) {
         menuToggle.setAttribute('aria-expanded', 'false');
       }

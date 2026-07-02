@@ -144,16 +144,80 @@ document.querySelectorAll(".tilt-card").forEach((card) => {
 // Theme toggle with persistence
 const themeToggle = document.getElementById("themeToggle");
 const storedTheme = localStorage.getItem("theme");
-if (storedTheme === "dark") document.body.classList.add("dark");
-if (themeToggle) {
-  themeToggle.textContent = document.body.classList.contains("dark") ? "🌙" : "☀️";
-  themeToggle.addEventListener("click", () => {
+if (storedTheme === "dark") {
+  document.body.classList.add("dark");
+}
+function bindThemeToggle() {
+  const toggle = document.getElementById("themeToggle");
+  if (!toggle) {
+    return;
+  }
+
+  toggle.textContent = document.body.classList.contains("dark") ? "🌙" : "☀️";
+  toggle.addEventListener("click", () => {
     document.body.classList.toggle("dark");
     const isDark = document.body.classList.contains("dark");
     localStorage.setItem("theme", isDark ? "dark" : "light");
-    themeToggle.textContent = isDark ? "🌙" : "☀️";
+    toggle.textContent = isDark ? "🌙" : "☀️";
+    toggleFireflies(isDark);
   });
 }
+
+let fireflyIntervalId = null;
+
+function createFirefly() {
+  const firefly = document.createElement("div");
+  firefly.className = "firefly";
+
+  const startX = Math.random() * window.innerWidth;
+  const startY = Math.random() * window.innerHeight;
+  const deltaX = (Math.random() - 0.5) * 260;
+  const deltaY = (Math.random() - 0.5) * 180;
+  const duration = 8 + Math.random() * 6;
+  const size = 4 + Math.random() * 4;
+
+  firefly.style.left = startX + "px";
+  firefly.style.top = startY + "px";
+  firefly.style.setProperty("--dx", deltaX + "px");
+  firefly.style.setProperty("--dy", deltaY + "px");
+  firefly.style.setProperty("--fly-duration", duration + "s");
+  firefly.style.width = size + "px";
+  firefly.style.height = size + "px";
+
+  document.body.appendChild(firefly);
+
+  setTimeout(() => firefly.remove(), duration * 1000);
+}
+
+function toggleFireflies(enabled) {
+  document.querySelectorAll(".firefly").forEach((fly) => fly.remove());
+
+  if (fireflyIntervalId) {
+    clearInterval(fireflyIntervalId);
+    fireflyIntervalId = null;
+  }
+
+  if (enabled) {
+    for (let index = 0; index < 8; index += 1) {
+      setTimeout(createFirefly, index * 300);
+    }
+    fireflyIntervalId = setInterval(createFirefly, 1800);
+  }
+}
+
+function syncThemeEffects() {
+  toggleFireflies(document.body.classList.contains("dark"));
+}
+
+if (document.querySelector(".site-header")) {
+  bindThemeToggle();
+  syncThemeEffects();
+}
+
+document.addEventListener("navbar:loaded", () => {
+  bindThemeToggle();
+  syncThemeEffects();
+});
 
 // Scroll tracking and back-to-top
 const sections = document.querySelectorAll("main section[id]");
