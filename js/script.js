@@ -190,6 +190,9 @@ function createFirefly() {
 }
 
 function toggleFireflies(enabled) {
+  // Respect user's motion preferences
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  
   document.querySelectorAll(".firefly").forEach((fly) => fly.remove());
 
   if (fireflyIntervalId) {
@@ -197,7 +200,8 @@ function toggleFireflies(enabled) {
     fireflyIntervalId = null;
   }
 
-  if (enabled) {
+  // Don't create fireflies if user prefers reduced motion
+  if (enabled && !prefersReducedMotion) {
     for (let index = 0; index < 8; index += 1) {
       setTimeout(createFirefly, index * 300);
     }
