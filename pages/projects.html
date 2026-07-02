@@ -16,20 +16,64 @@
     <section class="section">
       <div class="container reveal">
         <h1 class="section-title">Projects</h1>
-        <p class="section-intro">Selected builds focused on real product value, speed, and usability.</p>
-        <div class="filters" role="tablist" aria-label="Project filters">
-          <button class="filter-btn active" data-filter="all">All</button><button class="filter-btn" data-filter="frontend">Frontend</button><button class="filter-btn" data-filter="fullstack">Fullstack</button><button class="filter-btn" data-filter="python">Python</button>
-        </div>
-        <div class="projects-grid">
-          <article class="project-card tilt-card glass-card" data-category="frontend fullstack"><img class="lazy-image" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=900&auto=format&fit=crop&q=80" alt="Portfolio website screenshot" loading="lazy" /><div class="project-body"><h4>Portfolio Platform</h4><p>Modern personal branding site with responsive architecture and conversion-focused sections.</p><p class="tech-stack">HTML · CSS · JavaScript · CI/CD</p><div class="project-links"><a href="https://portfolio-nine-rho-sd56b6ql0u.vercel.app" target="_blank" rel="noopener noreferrer">Live Demo</a><a href="https://github.com/thy-jerryfajardo/Portfolio" target="_blank" rel="noopener noreferrer">GitHub</a></div></div></article>
-          <article class="project-card tilt-card glass-card" data-category="fullstack"><img class="lazy-image" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=900&auto=format&fit=crop&q=80" alt="Dashboard web app screenshot" loading="lazy" /><div class="project-body"><h4>Business Dashboard</h4><p>Data dashboard for KPI tracking with secure auth flow and dynamic charts.</p><p class="tech-stack">React · Node.js · PostgreSQL</p><div class="project-links"><a href="#">Live Demo</a><a href="#">GitHub</a></div></div></article>
-          <article class="project-card tilt-card glass-card" data-category="python fullstack"><img class="lazy-image" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" data-src="https://images.unsplash.com/photo-1526379879527-8559ecfcaec0?w=900&auto=format&fit=crop&q=80" alt="Automation app screenshot" loading="lazy" /><div class="project-body"><h4>Automation Toolkit</h4><p>Workflow automation scripts that reduce repetitive tasks and improve delivery speed.</p><p class="tech-stack">Python · APIs · Docker</p><div class="project-links"><a href="#">Live Demo</a><a href="#">GitHub</a></div></div></article>
+        <p class="section-intro">Selected builds focused on real product value, speed, and usability. Hover over the bubbles to see the interactive effect!</p>
+        <div class="references-grid">
+          <article class="reference-card">
+            <img class="project-image" src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=900&auto=format&fit=crop&q=80" alt="Portfolio website screenshot" loading="lazy" />
+            <div class="reference-header">
+              <h3>Portfolio Platform</h3>
+              <p class="reference-role">HTML · CSS · JavaScript · CI/CD</p>
+            </div>
+            <p class="reference-description">Modern personal branding site with responsive architecture and conversion-focused sections.</p>
+            <div class="reference-contact">
+              <a href="https://portfolio-nine-rho-sd56b6ql0u.vercel.app" target="_blank" rel="noopener noreferrer" class="contact-link">🔗 Live Demo</a>
+              <a href="https://github.com/thy-jerryfajardo/Portfolio" target="_blank" rel="noopener noreferrer" class="contact-link">💻 GitHub</a>
+            </div>
+          </article>
+          <article class="reference-card">
+            <img class="project-image" src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=900&auto=format&fit=crop&q=80" alt="Dashboard web app screenshot" loading="lazy" />
+            <div class="reference-header">
+              <h3>Business Dashboard</h3>
+              <p class="reference-role">React · Node.js · PostgreSQL</p>
+            </div>
+            <p class="reference-description">Data dashboard for KPI tracking with secure auth flow and dynamic charts.</p>
+            <div class="reference-contact">
+              <a href="#" class="contact-link">🔗 Live Demo</a>
+              <a href="#" class="contact-link">💻 GitHub</a>
+            </div>
+          </article>
+          <article class="reference-card">
+            <img class="project-image" src="https://images.unsplash.com/photo-1526379879527-8559ecfcaec0?w=900&auto=format&fit=crop&q=80" alt="Automation app screenshot" loading="lazy" />
+            <div class="reference-header">
+              <h3>Automation Toolkit</h3>
+              <p class="reference-role">Python · APIs · Docker</p>
+            </div>
+            <p class="reference-description">Workflow automation scripts that reduce repetitive tasks and improve delivery speed.</p>
+            <div class="reference-contact">
+              <a href="#" class="contact-link">🔗 Live Demo</a>
+              <a href="#" class="contact-link">💻 GitHub</a>
+            </div>
+          </article>
+          <article class="reference-card">
+            <img class="project-image" src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&auto=format&fit=crop&q=80" alt="SunnSafe app screenshot" loading="lazy" />
+            <div class="reference-header">
+              <h3>SunnSafe</h3>
+              <p class="reference-role">React · Web API · Responsive Design</p>
+            </div>
+            <p class="reference-description">UV protection awareness app helping users track sun exposure and make informed outdoor decisions safely.</p>
+            <div class="reference-contact">
+              <a href="https://sunnsafe.vercel.app" target="_blank" rel="noopener noreferrer" class="contact-link">🔗 Live Demo</a>
+              <a href="#" class="contact-link">💻 GitHub</a>
+            </div>
+          </article>
         </div>
       </div>
     </section>
   </main>
+  <button type="button" id="backToTop" class="back-to-top" aria-label="Back to top">↑</button>
   <script src="../js/navbar-loader.js"></script>
   <script src="../js/footer-loader.js"></script>
+  <script src="../js/reference-cards.js"></script>
   <script src="../js/script.js"></script>
 </body>
 </html>
