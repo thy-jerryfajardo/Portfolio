@@ -2,10 +2,7 @@
   "buildCommand": "echo 'Static site with Vercel Functions'",
   "outputDirectory": "./",
   "functions": {
-    "api/chat.js": {
-      "memory": 512,
-      "maxDuration": 30
-    }
+   
   }
 }
 
